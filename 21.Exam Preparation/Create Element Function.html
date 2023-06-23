@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+ 
+<body>
+    <div id="main"></div>
+    <script>
+        function create(type, attributes, ...children) {
+            let element = document.createElement(type);
+            for (const key in attributes) {
+                if (key === 'class') {
+                    element.className = attributes[key];
+                } else {
+                    element[key] = attributes[key];
+                }
+            }
+ 
+            for (const child of children) {
+                element.appendChild(child);
+            }
+ 
+            return element;
+        }
+ 
+        let main = document.getElementById('main');
+ 
+        let div = create(
+            'div', { class: 'test div', id: 'my-div', textContent: 'Its a div' },
+            create('label', { for: 'test', textContent: 'Check' },
+                create('input', { checked: true, type: 'checkbox', id: 'test' }),
+                create('input', { checked: true, type: 'text' }))
+ 
+        );
+ 
+ 
+        main.appendChild(div);
+    </script>
+</body>
+ 
+</html>
